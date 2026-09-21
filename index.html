@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All Stars Football Club | Registration</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <img class="brand-logo" src="/all-stars-logo.jpeg" alt="All Stars FC logo">
+      <div><strong>ALL STARS</strong><span>FOOTBALL CLUB</span></div>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#player">Player Registration</a>
+      <a href="#management">Management</a>
+      <a href="#training">Training</a>
+      <a href="#admin">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div>
+        <p class="eyebrow">DISCIPLINE • TEAMWORK • EXCELLENCE</p>
+        <h1>One Team.<br><span>One Goal.</span><br>More Success.</h1>
+        <p>Official player and management registration portal for All Stars Football Club.</p>
+        <div class="actions">
+          <a class="btn primary" href="#player">Register as Player</a>
+          <a class="btn ghost" href="#management">Management Registration</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img class="hero-logo" src="/all-stars-logo.jpeg" alt="All Stars FC logo">
+        <h2>NEW DRESS CODE</h2>
+        <p>Training starts Monday, 28th September 2026</p>
+        <div class="mini-grid">
+          <b>MON</b><span>Training Kit / Navy Blue</span>
+          <b>TUE</b><span>Black Jersey</span>
+          <b>WED</b><span>Training Kit / Navy Blue</span>
+          <b>THU</b><span>White Jersey</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-grid">
+      <div class="info-card"><b>Senior Monthly Due</b><strong>₦1,000</strong></div>
+      <div class="info-card"><b>Junior Monthly Due</b><strong>₦500</strong></div>
+      <div class="info-card"><b>Junior Training</b><strong>Fri 4:00 PM</strong></div>
+      <div class="info-card"><b>Junior Training</b><strong>Sat 6:30 AM</strong></div>
+    </section>
+
+    <section id="player" class="section">
+      <div class="section-title"><span>01</span><h2>Player Registration</h2></div>
+      <p class="muted">Complete the form carefully. Junior/U16 players must provide parent/guardian information.</p>
+      <form id="playerForm" class="form" enctype="multipart/form-data">
+        <div class="form-grid">
+          <label>Full name *<input name="full_name" required></label>
+          <label>Date of birth *<input name="date_of_birth" type="date" required></label>
+          <label>Gender<select name="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></label>
+          <label>Player category *<select name="player_category" required><option value="">Select</option><option>Senior</option><option>Junior / U16</option></select></label>
+          <label>Phone *<input name="phone" type="tel" required></label>
+          <label>WhatsApp<input name="whatsapp" type="tel"></label>
+          <label>Email<input name="email" type="email"></label>
+          <label>State<input name="state"></label>
+          <label>LGA<input name="lga"></label>
+          <label>Position played *<select name="position" required><option value="">Select</option><option>Goalkeeper</option><option>Defender</option><option>Midfielder</option><option>Winger</option><option>Striker</option><option>Utility</option></select></label>
+          <label>Preferred foot<select name="preferred_foot"><option value="">Select</option><option>Right</option><option>Left</option><option>Both</option></select></label>
+          <label>Height<input name="height" placeholder="e.g. 1.75 m"></label>
+          <label>Previous club<input name="previous_club"></label>
+          <label class="wide">Playing experience<textarea name="playing_experience"></textarea></label>
+          <label class="wide">Residential address *<textarea name="address" required></textarea></label>
+          <label>Parent/Guardian name<input name="parent_guardian_name"></label>
+          <label>Parent/Guardian phone<input name="parent_guardian_phone" type="tel"></label>
+          <label>Emergency contact name *<input name="emergency_name" required></label>
+          <label>Emergency contact phone *<input name="emergency_phone" type="tel" required></label>
+          <label class="wide">Medical/emergency information<textarea name="medical_information" placeholder="Allergies, conditions, or other emergency information (optional)"></textarea></label>
+          <label class="wide upload">Passport photograph *<input name="passport" type="file" accept="image/jpeg,image/png,image/webp" required><small>JPG, PNG or WEBP. Maximum 5MB.</small></label>
+        </div>
+        <label class="check"><input type="checkbox" name="consent" required> I confirm that the information supplied is accurate and I consent to All Stars Football Club keeping it for registration and club administration.</label>
+        <button class="btn primary" type="submit">Submit Player Registration</button>
+        <div id="playerMessage" class="message"></div>
+      </form>
+    </section>
+
+    <section id="management" class="section alt">
+      <div class="section-title"><span>02</span><h2>Management Registration</h2></div>
+      <form id="managementForm" class="form" enctype="multipart/form-data">
+        <div class="form-grid">
+          <label>Full name *<input name="full_name" required></label>
+          <label>Role / position *<input name="role" placeholder="Coach, Team Manager, Secretary..." required></label>
+          <label>Date of birth<input name="date_of_birth" type="date"></label>
+          <label>Gender<select name="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></label>
+          <label>Phone *<input name="phone" type="tel" required></label>
+          <label>WhatsApp<input name="whatsapp" type="tel"></label>
+          <label>Email<input name="email" type="email"></label>
+          <label>Residential address *<input name="address" required></label>
+          <label class="wide">Football/coaching experience<textarea name="experience"></textarea></label>
+          <label class="wide">Qualifications / certifications<textarea name="qualifications"></textarea></label>
+          <label>Emergency contact name<input name="emergency_name"></label>
+          <label>Emergency contact phone<input name="emergency_phone" type="tel"></label>
+          <label class="wide">Other information<textarea name="other_information"></textarea></label>
+          <label class="wide upload">Passport photograph *<input name="passport" type="file" accept="image/jpeg,image/png,image/webp" required><small>JPG, PNG or WEBP. Maximum 5MB.</small></label>
+        </div>
+        <button class="btn primary" type="submit">Submit Management Registration</button>
+        <div id="managementMessage" class="message"></div>
+      </form>
+    </section>
+
+    <section id="training" class="section">
+      <div class="section-title"><span>03</span><h2>Training Schedule</h2></div>
+      <div class="schedule">
+        <div><b>MONDAY</b><span>Training Kit / Navy Blue Jersey</span></div>
+        <div><b>TUESDAY</b><span>Black Jersey</span></div>
+        <div><b>WEDNESDAY</b><span>Training Kit / Navy Blue Jersey</span></div>
+        <div><b>THURSDAY</b><span>White Jersey</span></div>
+        <div><b>JUNIOR • FRIDAY</b><span>4:00 PM • White Jersey</span></div>
+        <div><b>JUNIOR • SATURDAY</b><span>6:30 AM • Blue Jersey</span></div>
+      </div>
+    </section>
+
+    <section id="admin" class="section alt">
+      <div class="section-title"><span>04</span><h2>Management Admin</h2></div>
+      <div id="loginBox">
+        <p class="muted">Authorized management only.</p>
+        <form id="loginForm" class="login-form">
+          <input id="adminEmail" type="email" placeholder="Admin email" required>
+          <input id="adminPassword" type="password" placeholder="Password" required>
+          <button class="btn primary">Login</button>
+        </form>
+        <div id="loginMessage" class="message"></div>
+      </div>
+      <div id="dashboard" hidden>
+        <div class="dash-head"><div><h3>Registration Dashboard</h3><p class="muted">Use the <b>PDF</b> button beside any registration to generate a printable A4 record.</p></div><button id="logout" class="btn ghost">Logout</button></div>
+        <div class="tabs"><button data-tab="players" class="active">Players</button><button data-tab="management">Management</button></div>
+        <div id="dashboardContent"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>ALL STARS FOOTBALL CLUB</strong>
+    <span>Let's Train, Grow and Achieve Together!</span>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
