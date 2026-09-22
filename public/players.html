@@ -491,27 +491,28 @@
           .toLowerCase();
 
 
-      const filtered =
-        allPlayers.filter(player =>
+     const filtered =
+  allPlayers.filter(player =>
 
-          player.full_name
-            .toLowerCase()
-            .includes(search)
+    player.status !== "Rejected" &&
+    player.full_name
+      .toLowerCase()
+      .includes(search)
 
-        );
-
+  );
 
       const registeredSenior =
-        filtered.filter(player =>
-          player.player_category === "Senior"
-        );
+  filtered.filter(player =>
+    player.status === "Pending" &&
+    player.player_category === "Senior"
+  );
 
 
-      const registeredJunior =
-        filtered.filter(player =>
-          player.player_category === "Junior / U16"
-        );
-
+const registeredJunior =
+  filtered.filter(player =>
+    player.status === "Pending" &&
+    player.player_category === "Junior / U16"
+  );
 
       const approved =
         filtered.filter(player =>
