@@ -20,7 +20,7 @@
       <a href="#admin">Admin</a>
       <a href="players.html">Players</a>
    
-    </nav>
+    </nav> 
   </header>
 
   <main>
@@ -54,38 +54,7 @@
       <div class="info-card"><b>Junior Training</b><strong>Sat 6:30 AM</strong></div>
     </section>
 
-    <section id="player" class="section">
-      <div class="section-title"><span>01</span><h2>Player Registration</h2></div>
-      <p class="muted">Complete the form carefully. Junior/U16 players must provide parent/guardian information.</p>
-      <form id="playerForm" class="form" enctype="multipart/form-data">
-        <div class="form-grid">
-          <label>Full name *<input name="full_name" required></label>
-          <label>Date of birth *<input name="date_of_birth" type="date" required></label>
-          <label>Gender<select name="gender"><option value="">Select</option><option>Male</option><option>Female</option></select></label>
-          <label>Player category *<select name="player_category" required><option value="">Select</option><option>Senior</option><option>Junior / U16</option></select></label>
-          <label>Phone *<input name="phone" type="tel" required></label>
-          <label>WhatsApp<input name="whatsapp" type="tel"></label>
-          <label>Email<input name="email" type="email"></label>
-          <label>State<input name="state"></label>
-          <label>LGA<input name="lga"></label>
-          <label>Position played *<select name="position" required><option value="">Select</option><option>Goalkeeper</option><option>Defender</option><option>Midfielder</option><option>Winger</option><option>Striker</option><option>Utility</option></select></label>
-          <label>Preferred foot<select name="preferred_foot"><option value="">Select</option><option>Right</option><option>Left</option><option>Both</option></select></label>
-          <label>Height<input name="height" placeholder="e.g. 1.75 m"></label>
-          <label>Previous club<input name="previous_club"></label>
-          <label class="wide">Playing experience<textarea name="playing_experience"></textarea></label>
-          <label class="wide">Residential address *<textarea name="address" required></textarea></label>
-          <label>Parent/Guardian name<input name="parent_guardian_name"></label>
-          <label>Parent/Guardian phone<input name="parent_guardian_phone" type="tel"></label>
-          <label>Emergency contact name *<input name="emergency_name" required></label>
-          <label>Emergency contact phone *<input name="emergency_phone" type="tel" required></label>
-          <label class="wide">Medical/emergency information<textarea name="medical_information" placeholder="Allergies, conditions, or other emergency information (optional)"></textarea></label>
-          <label class="wide upload">Passport photograph *<input name="passport" type="file" accept="image/jpeg,image/png,image/webp" required><small>JPG, PNG or WEBP. Maximum 5MB.</small></label>
-        </div>
-        <label class="check"><input type="checkbox" name="consent" required> I confirm that the information supplied is accurate and I consent to All Stars Football Club keeping it for registration and club administration.</label>
-        <button class="btn primary" type="submit">Submit Player Registration</button>
-        <div id="playerMessage" class="message"></div>
-      </form>
-    </section>
+   
 
     <section id="management" class="section alt">
       <div class="section-title"><span>02</span><h2>Management Registration</h2></div>
