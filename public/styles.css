@@ -18,3 +18,26 @@ nav{display:flex;gap:18px}nav a{color:#fff;text-decoration:none;font-size:13px;f
 .login-form{display:flex;gap:10px;max-width:650px}.login-form input{flex:1;padding:13px;border:1px solid var(--line);border-radius:10px}.dash-head{display:flex;justify-content:space-between;align-items:center}.tabs{display:flex;gap:8px;margin:20px 0}.tabs button{padding:10px 15px;border:1px solid var(--line);background:#fff;border-radius:9px;font-weight:800;cursor:pointer}.tabs button.active{background:var(--navy);color:#fff}.table-wrap{overflow:auto;background:#fff;border-radius:14px}.data-table{width:100%;border-collapse:collapse;min-width:850px}.data-table th,.data-table td{text-align:left;padding:12px;border-bottom:1px solid var(--line);font-size:13px}.data-table th{background:#f2f6fb}.status{font-weight:800}.status.Pending{color:#b77900}.status.Approved{color:#16803c}.status.Rejected{color:#b42318}.admin-actions button{margin-right:5px;padding:6px 9px;border-radius:7px;border:1px solid var(--line);background:#fff;cursor:pointer}
 footer{background:var(--navy);color:#fff;padding:35px 7%;display:flex;justify-content:space-between;gap:20px}footer span{color:var(--gold)}
 @media(max-width:850px){nav{display:none}.hero{grid-template-columns:1fr;padding-top:55px}.info-grid{grid-template-columns:repeat(2,1fr);margin-top:-40px}.form-grid,.schedule{grid-template-columns:1fr}.wide{grid-column:auto}.login-form{flex-direction:column}footer{flex-direction:column}}
+/* Mobile Navigation Fix */
+@media (max-width: 700px) {
+
+  header nav {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 10px;
+    overflow: visible;
+  }
+
+  header nav a {
+    display: inline-block;
+    padding: 8px 10px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+}
