@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Players | All Stars Football Club</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .players-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 30px 20px 60px;
+    }
+
+    .players-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .players-header img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .players-header h1 {
+      margin: 5px 0;
+    }
+
+    .players-header p {
+      opacity: 0.8;
+    }
+
+    .players-section {
+      margin-top: 35px;
+    }
+
+    .players-section h2 {
+      margin-bottom: 15px;
+    }
+
+    .players-table-wrapper {
+      overflow-x: auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .players-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 600px;
+    }
+
+    .players-table th,
+    .players-table td {
+      padding: 14px;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .players-table th {
+      font-weight: 700;
+    }
+
+    .players-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .empty-message {
+      padding: 25px;
+      text-align: center;
+      opacity: 0.7;
+    }
+
+    .status-approved {
+      font-weight: 700;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="index.html#registration">Registration</a>
+      <a href="players.html">Players</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="players-page">
+
+    <section class="players-header">
+      <img src="all-stars-logo.jpeg" alt="All Stars Football Club Logo">
+
+      <h1>All Stars Football Club</h1>
+
+      <p>Registered & Approved Players</p>
+    </section>
+
+    <section class="players-section">
+
+      <h2>Registered Players</h2>
+
+      <div class="players-table-wrapper">
+
+        <div id="registeredLoading" class="loading">
+          Loading players...
+        </div>
+
+        <table class="players-table" id="registeredTable" style="display:none;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player Name</th>
+              <th>Category</th>
+              <th>Position</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="registeredPlayers"></tbody>
+        </table>
+
+        <div id="registeredEmpty" class="empty-message" style="display:none;">
+          No registered players yet.
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="players-section">
+
+      <h2>Approved Players</h2>
+
+      <div class="players-table-wrapper">
+
+        <div id="approvedLoading" class="loading">
+          Loading approved players...
+        </div>
+
+        <table class="players-table" id="approvedTable" style="display:none;">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player Name</th>
+              <th>Category</th>
+              <th>Position</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="approvedPlayers"></tbody>
+        </table>
+
+        <div id="approvedEmpty" class="empty-message" style="display:none;">
+          No approved players yet.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL =
+      "https://sagntfskpsyrwhzgtuzm.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "YOUR_PUBLISHABLE_KEY";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    function escapeHTML(value) {
+      const div = document.createElement("div");
+      div.textContent = value ?? "";
+      return div.innerHTML;
+    }
+
+
+    async function loadPlayers() {
+
+      const registeredLoading =
+        document.getElementById("registeredLoading");
+
+      const approvedLoading =
+        document.getElementById("approvedLoading");
+
+      try {
+
+        const { data, error } =
+          await supabaseClient
+            .from("player_registrations")
+            .select(
+              "full_name, player_category, position, status"
+            )
+            .order("full_name", { ascending: true });
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        const players = data || [];
+
+        const registered =
+          document.getElementById("registeredPlayers");
+
+        const approved =
+          document.getElementById("approvedPlayers");
+
+
+        registered.innerHTML = "";
+        approved.innerHTML = "";
+
+
+        players.forEach((player, index) => {
+
+          const row = `
+            <tr>
+              <td>${index + 1}</td>
+              <td>${escapeHTML(player.full_name)}</td>
+              <td>${escapeHTML(player.player_category)}</td>
+              <td>${escapeHTML(player.position)}</td>
+              <td>${escapeHTML(player.status)}</td>
+            </tr>
+          `;
+
+          registered.insertAdjacentHTML("beforeend", row);
+
+
+          if (player.status === "Approved") {
+
+            const approvedRow = `
+              <tr>
+                <td>${approved.children.length + 1}</td>
+                <td>${escapeHTML(player.full_name)}</td>
+                <td>${escapeHTML(player.player_category)}</td>
+                <td>${escapeHTML(player.position)}</td>
+                <td class="status-approved">Approved</td>
+              </tr>
+            `;
+
+            approved.insertAdjacentHTML(
+              "beforeend",
+              approvedRow
+            );
+          }
+
+        });
+
+
+        registeredLoading.style.display = "none";
+
+        if (players.length > 0) {
+          document.getElementById(
+            "registeredTable"
+          ).style.display = "table";
+        } else {
+          document.getElementById(
+            "registeredEmpty"
+          ).style.display = "block";
+        }
+
+
+        approvedLoading.style.display = "none";
+
+        const approvedCount =
+          players.filter(
+            player => player.status === "Approved"
+          ).length;
+
+        if (approvedCount > 0) {
+
+          document.getElementById(
+            "approvedTable"
+          ).style.display = "table";
+
+        } else {
+
+          document.getElementById(
+            "approvedEmpty"
+          ).style.display = "block";
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        registeredLoading.textContent =
+          "Unable to load players.";
+
+        approvedLoading.textContent =
+          "Unable to load approved players.";
+      }
+    }
+
+
+    loadPlayers();
+  </script>
+
+</body>
+</html>
