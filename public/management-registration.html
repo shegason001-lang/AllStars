@@ -6,6 +6,107 @@
   <title>Management Registration - All Stars Football Club</title>
 
   <link rel="stylesheet" href="styles.css">
+    <style>
+/* Management Registration page layout fix */
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.site-logo {
+  width: 65px !important;
+  height: 65px !important;
+  max-width: 65px !important;
+  object-fit: contain;
+}
+
+header nav {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 25px;
+}
+
+.hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 35px 20px;
+  text-align: center;
+}
+
+.hero-logo {
+  width: 100px !important;
+  height: 100px !important;
+  max-width: 100px !important;
+  object-fit: contain;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.form-section {
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+form {
+  width: 100%;
+}
+
+form input,
+form select,
+form textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+
+  .header-inner {
+    padding: 12px 15px;
+  }
+
+  .site-logo {
+    width: 50px !important;
+    height: 50px !important;
+    max-width: 50px !important;
+  }
+
+  .hero-logo {
+    width: 75px !important;
+    height: 75px !important;
+    max-width: 75px !important;
+  }
+
+  .form-section {
+    margin: 15px;
+    padding: 20px;
+  }
+
+}
+</style>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
