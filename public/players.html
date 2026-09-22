@@ -9,45 +9,95 @@
   <link rel="stylesheet" href="styles.css">
 
   <style>
+    body {
+      margin: 0;
+      background: #f5f7fa;
+    }
+
     .players-page {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 30px 20px 60px;
+      max-width: 1150px;
+      margin: auto;
+      padding: 25px 18px 60px;
     }
 
-    .players-header {
+    .players-hero {
       text-align: center;
-      margin-bottom: 30px;
+      background: #fff;
+      border-radius: 18px;
+      padding: 30px 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
     }
 
-    .players-header img {
-      width: 90px;
-      height: 90px;
+    .players-hero img {
+      width: 100px;
+      height: 100px;
       object-fit: contain;
       margin-bottom: 10px;
     }
 
-    .players-header h1 {
+    .players-hero h1 {
       margin: 5px 0;
+      font-size: 30px;
     }
 
-    .players-header p {
-      opacity: 0.8;
+    .players-hero p {
+      margin: 8px 0 0;
+      opacity: .75;
     }
 
-    .players-section {
-      margin-top: 35px;
+    .search-box {
+      margin: 25px auto;
+      max-width: 600px;
     }
 
-    .players-section h2 {
+    .search-box input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 15px 18px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+    }
+
+    .search-box input:focus {
+      border-color: #1d4ed8;
+    }
+
+    .section {
+      margin-top: 30px;
+    }
+
+    .section-title {
+      background: #fff;
+      border-radius: 14px;
+      padding: 18px 20px;
       margin-bottom: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    .section-title p {
+      margin: 5px 0 0;
+      opacity: .7;
+    }
+
+    .team-title {
+      margin: 20px 0 10px;
+      font-size: 19px;
     }
 
     .players-table-wrapper {
       overflow-x: auto;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.07);
     }
 
     .players-table {
@@ -58,32 +108,73 @@
 
     .players-table th,
     .players-table td {
-      padding: 14px;
+      padding: 14px 16px;
       text-align: left;
       border-bottom: 1px solid #eee;
     }
 
     .players-table th {
       font-weight: 700;
+      background: #fafafa;
     }
 
     .players-table tr:last-child td {
       border-bottom: none;
     }
 
-    .empty-message {
-      padding: 25px;
-      text-align: center;
-      opacity: 0.7;
+    .status {
+      font-weight: 700;
     }
 
-    .status-approved {
-      font-weight: 700;
+    .approved {
+      color: #16803c;
+    }
+
+    .pending {
+      color: #b77900;
+    }
+
+    .empty {
+      background: white;
+      padding: 25px;
+      text-align: center;
+      border-radius: 14px;
+      opacity: .7;
     }
 
     .loading {
       text-align: center;
       padding: 30px;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 35px;
+    }
+
+    .back-home a {
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 600px) {
+
+      .players-page {
+        padding: 15px 10px 40px;
+      }
+
+      .players-hero h1 {
+        font-size: 24px;
+      }
+
+      .players-hero img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .section-title h2 {
+        font-size: 19px;
+      }
     }
   </style>
 </head>
@@ -99,42 +190,121 @@
     </nav>
   </header>
 
+
   <main class="players-page">
 
-    <section class="players-header">
-      <img src="all-stars-logo.jpeg" alt="All Stars Football Club Logo">
+    <!-- HERO -->
+    <section class="players-hero">
+
+      <img
+        src="all-stars-logo.jpeg"
+        alt="All Stars Football Club Logo"
+      >
 
       <h1>All Stars Football Club</h1>
 
-      <p>Registered & Approved Players</p>
+      <p>
+        Official Registered & Approved Players
+      </p>
+
     </section>
 
-    <section class="players-section">
 
-      <h2>Registered Players</h2>
+    <!-- SEARCH -->
+    <div class="search-box">
 
-      <div class="players-table-wrapper">
+      <input
+        type="search"
+        id="playerSearch"
+        placeholder="🔎 Search player by name..."
+        autocomplete="off"
+      >
 
-        <div id="registeredLoading" class="loading">
-          Loading players...
+    </div>
+
+
+    <!-- REGISTERED PLAYERS -->
+    <section class="section">
+
+      <div class="section-title">
+
+        <h2>👥 Registered Players</h2>
+
+        <p>
+          Players who have submitted their registration.
+        </p>
+
+      </div>
+
+      <div
+        id="registeredLoading"
+        class="loading"
+      >
+        Loading registered players...
+      </div>
+
+
+      <div
+        id="registeredEmpty"
+        class="empty"
+        style="display:none;"
+      >
+        No registered players found.
+      </div>
+
+
+      <div
+        id="registeredContent"
+        style="display:none;"
+      >
+
+        <!-- SENIOR -->
+        <h3 class="team-title">
+          Senior Team
+        </h3>
+
+        <div class="players-table-wrapper">
+
+          <table class="players-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player Name</th>
+                <th>Position</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="registeredSenior"></tbody>
+
+          </table>
+
         </div>
 
-        <table class="players-table" id="registeredTable" style="display:none;">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Player Name</th>
-              <th>Category</th>
-              <th>Position</th>
-              <th>Status</th>
-            </tr>
-          </thead>
 
-          <tbody id="registeredPlayers"></tbody>
-        </table>
+        <!-- JUNIOR -->
+        <h3 class="team-title">
+          Junior Team — U16
+        </h3>
 
-        <div id="registeredEmpty" class="empty-message" style="display:none;">
-          No registered players yet.
+        <div class="players-table-wrapper">
+
+          <table class="players-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player Name</th>
+                <th>Position</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="registeredJunior"></tbody>
+
+          </table>
+
         </div>
 
       </div>
@@ -142,48 +312,117 @@
     </section>
 
 
-    <section class="players-section">
+    <!-- APPROVED PLAYERS -->
+    <section class="section">
 
-      <h2>Approved Players</h2>
+      <div class="section-title">
 
-      <div class="players-table-wrapper">
+        <h2>⭐ Approved Players</h2>
 
-        <div id="approvedLoading" class="loading">
-          Loading approved players...
+        <p>
+          Players officially approved by All Stars Football Club management.
+        </p>
+
+      </div>
+
+
+      <div
+        id="approvedLoading"
+        class="loading"
+      >
+        Loading approved players...
+      </div>
+
+
+      <div
+        id="approvedEmpty"
+        class="empty"
+        style="display:none;"
+      >
+        No approved players found.
+      </div>
+
+
+      <div
+        id="approvedContent"
+        style="display:none;"
+      >
+
+        <!-- SENIOR -->
+        <h3 class="team-title">
+          ⭐ Senior Team
+        </h3>
+
+        <div class="players-table-wrapper">
+
+          <table class="players-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player Name</th>
+                <th>Position</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="approvedSenior"></tbody>
+
+          </table>
+
         </div>
 
-        <table class="players-table" id="approvedTable" style="display:none;">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Player Name</th>
-              <th>Category</th>
-              <th>Position</th>
-              <th>Status</th>
-            </tr>
-          </thead>
 
-          <tbody id="approvedPlayers"></tbody>
-        </table>
+        <!-- JUNIOR -->
+        <h3 class="team-title">
+          🌟 Junior Team — U16
+        </h3>
 
-        <div id="approvedEmpty" class="empty-message" style="display:none;">
-          No approved players yet.
+        <div class="players-table-wrapper">
+
+          <table class="players-table">
+
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Player Name</th>
+                <th>Position</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+
+            <tbody id="approvedJunior"></tbody>
+
+          </table>
+
         </div>
 
       </div>
 
     </section>
+
+
+    <div class="back-home">
+      <a href="index.html">
+        ← Back to Home
+      </a>
+    </div>
 
   </main>
 
+
+  <!-- SUPABASE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
   <script>
+
     const SUPABASE_URL =
       "https://sagntfskpsyrwhzgtuzm.supabase.co";
 
     const SUPABASE_ANON_KEY =
       "sb_publishable_tfBwDmxzJr8kpWmU7IW3gg_pRJ0VJpi";
+
 
     const supabaseClient =
       window.supabase.createClient(
@@ -192,20 +431,189 @@
       );
 
 
+    let allPlayers = [];
+
+
     function escapeHTML(value) {
-      const div = document.createElement("div");
-      div.textContent = value ?? "";
+
+      const div =
+        document.createElement("div");
+
+      div.textContent =
+        value ?? "";
+
       return div.innerHTML;
+
+    }
+
+
+    function createRow(
+      player,
+      number
+    ) {
+
+      return `
+        <tr>
+
+          <td>${number}</td>
+
+          <td>
+            ${escapeHTML(player.full_name)}
+          </td>
+
+          <td>
+            ${escapeHTML(player.position)}
+          </td>
+
+          <td class="status ${
+            player.status === "Approved"
+              ? "approved"
+              : "pending"
+          }">
+
+            ${escapeHTML(player.status)}
+
+          </td>
+
+        </tr>
+      `;
+
+    }
+
+
+    function renderPlayers() {
+
+      const search =
+        document
+          .getElementById("playerSearch")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const filtered =
+        allPlayers.filter(player =>
+
+          player.full_name
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+
+      const registeredSenior =
+        filtered.filter(player =>
+          player.player_category === "Senior"
+        );
+
+
+      const registeredJunior =
+        filtered.filter(player =>
+          player.player_category === "Junior / U16"
+        );
+
+
+      const approved =
+        filtered.filter(player =>
+          player.status === "Approved"
+        );
+
+
+      const approvedSenior =
+        approved.filter(player =>
+          player.player_category === "Senior"
+        );
+
+
+      const approvedJunior =
+        approved.filter(player =>
+          player.player_category === "Junior / U16"
+        );
+
+
+      document.getElementById(
+        "registeredSenior"
+      ).innerHTML =
+        registeredSenior
+          .map((player, index) =>
+            createRow(player, index + 1)
+          )
+          .join("");
+
+
+      document.getElementById(
+        "registeredJunior"
+      ).innerHTML =
+        registeredJunior
+          .map((player, index) =>
+            createRow(player, index + 1)
+          )
+          .join("");
+
+
+      document.getElementById(
+        "approvedSenior"
+      ).innerHTML =
+        approvedSenior
+          .map((player, index) =>
+            createRow(player, index + 1)
+          )
+          .join("");
+
+
+      document.getElementById(
+        "approvedJunior"
+      ).innerHTML =
+        approvedJunior
+          .map((player, index) =>
+            createRow(player, index + 1)
+          )
+          .join("");
+
+
+      const hasRegistered =
+        filtered.length > 0;
+
+
+      const hasApproved =
+        approved.length > 0;
+
+
+      document.getElementById(
+        "registeredContent"
+      ).style.display =
+        hasRegistered
+          ? "block"
+          : "none";
+
+
+      document.getElementById(
+        "registeredEmpty"
+      ).style.display =
+        hasRegistered
+          ? "none"
+          : "block";
+
+
+      document.getElementById(
+        "approvedContent"
+      ).style.display =
+        hasApproved
+          ? "block"
+          : "none";
+
+
+      document.getElementById(
+        "approvedEmpty"
+      ).style.display =
+        hasApproved
+          ? "none"
+          : "block";
+
     }
 
 
     async function loadPlayers() {
-
-      const registeredLoading =
-        document.getElementById("registeredLoading");
-
-      const approvedLoading =
-        document.getElementById("approvedLoading");
 
       try {
 
@@ -215,7 +623,12 @@
             .select(
               "full_name, player_category, position, status"
             )
-            .order("full_name", { ascending: true });
+            .order(
+              "full_name",
+              {
+                ascending: true
+              }
+            );
 
 
         if (error) {
@@ -223,103 +636,59 @@
         }
 
 
-        const players = data || [];
-
-        const registered =
-          document.getElementById("registeredPlayers");
-
-        const approved =
-          document.getElementById("approvedPlayers");
+        allPlayers =
+          data || [];
 
 
-        registered.innerHTML = "";
-        approved.innerHTML = "";
+        document.getElementById(
+          "registeredLoading"
+        ).style.display =
+          "none";
 
 
-        players.forEach((player, index) => {
-
-          const row = `
-            <tr>
-              <td>${index + 1}</td>
-              <td>${escapeHTML(player.full_name)}</td>
-              <td>${escapeHTML(player.player_category)}</td>
-              <td>${escapeHTML(player.position)}</td>
-              <td>${escapeHTML(player.status)}</td>
-            </tr>
-          `;
-
-          registered.insertAdjacentHTML("beforeend", row);
+        document.getElementById(
+          "approvedLoading"
+        ).style.display =
+          "none";
 
 
-          if (player.status === "Approved") {
+        renderPlayers();
 
-            const approvedRow = `
-              <tr>
-                <td>${approved.children.length + 1}</td>
-                <td>${escapeHTML(player.full_name)}</td>
-                <td>${escapeHTML(player.player_category)}</td>
-                <td>${escapeHTML(player.position)}</td>
-                <td class="status-approved">Approved</td>
-              </tr>
-            `;
-
-            approved.insertAdjacentHTML(
-              "beforeend",
-              approvedRow
-            );
-          }
-
-        });
-
-
-        registeredLoading.style.display = "none";
-
-        if (players.length > 0) {
-          document.getElementById(
-            "registeredTable"
-          ).style.display = "table";
-        } else {
-          document.getElementById(
-            "registeredEmpty"
-          ).style.display = "block";
-        }
-
-
-        approvedLoading.style.display = "none";
-
-        const approvedCount =
-          players.filter(
-            player => player.status === "Approved"
-          ).length;
-
-        if (approvedCount > 0) {
-
-          document.getElementById(
-            "approvedTable"
-          ).style.display = "table";
-
-        } else {
-
-          document.getElementById(
-            "approvedEmpty"
-          ).style.display = "block";
-
-        }
 
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          "Players loading error:",
+          error
+        );
 
-        registeredLoading.textContent =
+
+        document.getElementById(
+          "registeredLoading"
+        ).textContent =
           "Unable to load players.";
 
-        approvedLoading.textContent =
+
+        document.getElementById(
+          "approvedLoading"
+        ).textContent =
           "Unable to load approved players.";
+
       }
+
     }
 
 
+    document
+      .getElementById("playerSearch")
+      .addEventListener(
+        "input",
+        renderPlayers
+      );
+
+
     loadPlayers();
+
   </script>
 
 </body>
