@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Management Registration - All Stars Football Club</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <img
+      src="all-stars-logo.jpeg"
+      alt="All Stars Football Club Logo"
+      class="site-logo"
+    >
+
+    <div>
+      <h1>ALL STARS FOOTBALL CLUB</h1>
+      <p>Management Registration</p>
+    </div>
+
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="player-registration.html">Player Registration</a>
+    <a href="management-registration.html">Management Registration</a>
+    <a href="players.html">Players</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+</header>
+
+
+<main class="container">
+
+  <section class="hero">
+    <img
+      src="all-stars-logo.jpeg"
+      alt="All Stars FC"
+      class="hero-logo"
+    >
+
+    <h2>Management Registration</h2>
+
+    <p>
+      Register as a member of the All Stars Football Club management team.
+    </p>
+  </section>
+
+
+  <section class="form-section">
+
+    <form id="managementForm">
+
+      <h2>Personal Information</h2>
+
+      <label>
+        Full Name *
+        <input
+          type="text"
+          id="full_name"
+          required
+        >
+      </label>
+
+
+      <label>
+        Passport Photograph *
+        <input
+          type="file"
+          id="passport"
+          accept="image/jpeg,image/png,image/webp"
+          required
+        >
+      </label>
+
+      <div id="photoPreview"></div>
+
+
+      <label>
+        Date of Birth
+        <input
+          type="date"
+          id="date_of_birth"
+        >
+      </label>
+
+
+      <label>
+        Gender
+        <select id="gender">
+          <option value="">Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </label>
+
+
+      <h2>Management Information</h2>
+
+      <label>
+        Management Role *
+        <select id="role" required>
+
+          <option value="">
+            Select Management Role
+          </option>
+
+          <option value="Chairman">
+            Chairman
+          </option>
+
+          <option value="Vice Chairman">
+            Vice Chairman
+          </option>
+
+          <option value="Secretary">
+            Secretary
+          </option>
+
+          <option value="Assistant Secretary">
+            Assistant Secretary
+          </option>
+
+          <option value="Treasurer">
+            Treasurer
+          </option>
+
+          <option value="Financial Secretary">
+            Financial Secretary
+          </option>
+
+          <option value="Public Relations Officer">
+            Public Relations Officer
+          </option>
+
+          <option value="Team Manager">
+            Team Manager
+          </option>
+
+          <option value="Coach">
+            Coach
+          </option>
+
+          <option value="Assistant Coach">
+            Assistant Coach
+          </option>
+
+          <option value="Welfare Officer">
+            Welfare Officer
+          </option>
+
+          <option value="Other">
+            Other
+          </option>
+
+        </select>
+      </label>
+
+
+      <label>
+        Phone Number *
+        <input
+          type="tel"
+          id="phone"
+          required
+        >
+      </label>
+
+
+      <label>
+        WhatsApp Number
+        <input
+          type="tel"
+          id="whatsapp"
+        >
+      </label>
+
+
+      <label>
+        Email Address
+        <input
+          type="email"
+          id="email"
+        >
+      </label>
+
+
+      <label>
+        Residential Address *
+        <textarea
+          id="address"
+          rows="3"
+          required
+        ></textarea>
+      </label>
+
+
+      <label>
+        Management Experience
+        <textarea
+          id="experience"
+          rows="4"
+          placeholder="Describe your football or management experience..."
+        ></textarea>
+      </label>
+
+
+      <label>
+        Qualifications
+        <textarea
+          id="qualifications"
+          rows="4"
+          placeholder="Enter relevant qualifications, certificates or training..."
+        ></textarea>
+      </label>
+
+
+      <h2>Emergency Contact</h2>
+
+      <label>
+        Emergency Contact Name
+        <input
+          type="text"
+          id="emergency_name"
+        >
+      </label>
+
+
+      <label>
+        Emergency Contact Phone
+        <input
+          type="tel"
+          id="emergency_phone"
+        >
+      </label>
+
+
+      <label>
+        Other Information
+        <textarea
+          id="other_information"
+          rows="4"
+          placeholder="Any additional information..."
+        ></textarea>
+      </label>
+
+
+      <button
+        type="submit"
+        class="btn"
+        id="submitBtn"
+      >
+        Submit Management Registration
+      </button>
+
+      <div id="message"></div>
+
+    </form>
+
+  </section>
+
+</main>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://sagntfskpsyrwhzgtuzm.supabase.co";
+
+const SUPABASE_ANON_KEY =
+  "YOUR_PUBLISHABLE_KEY";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+  );
+
+
+const form =
+  document.getElementById("managementForm");
+
+const message =
+  document.getElementById("message");
+
+const passport =
+  document.getElementById("passport");
+
+const photoPreview =
+  document.getElementById("photoPreview");
+
+
+passport.addEventListener("change", () => {
+
+  const file = passport.files[0];
+
+  if (!file) {
+    photoPreview.innerHTML = "";
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = function(e) {
+
+    photoPreview.innerHTML = `
+      <img
+        src="${e.target.result}"
+        alt="Passport Preview"
+        style="
+          width:150px;
+          height:180px;
+          object-fit:cover;
+          border-radius:8px;
+          margin:10px 0;
+        "
+      >
+    `;
+
+  };
+
+  reader.readAsDataURL(file);
+
+});
+
+
+form.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  message.innerHTML = "";
+
+  const submitBtn =
+    document.getElementById("submitBtn");
+
+  submitBtn.disabled = true;
+
+  submitBtn.textContent =
+    "Submitting...";
+
+
+  const file =
+    passport.files[0];
+
+  if (!file) {
+
+    message.innerHTML =
+      "<p>Please select a passport photograph.</p>";
+
+    submitBtn.disabled = false;
+
+    submitBtn.textContent =
+      "Submit Management Registration";
+
+    return;
+  }
+
+
+  try {
+
+    const safeName =
+      document
+        .getElementById("full_name")
+        .value
+        .trim()
+        .replace(/[^a-zA-Z0-9]+/g, "-")
+        .toLowerCase();
+
+
+    const extension =
+      file.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+
+    const uniqueName =
+      `${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(2, 8)}`;
+
+
+    const filePath =
+      `management/${safeName}-${uniqueName}.${extension}`;
+
+
+    const { error: uploadError } =
+      await supabaseClient
+        .storage
+        .from("player-documents")
+        .upload(filePath, file, {
+          cacheControl: "3600",
+          upsert: false
+        });
+
+
+    if (uploadError) {
+      throw uploadError;
+    }
+
+
+    const managementData = {
+
+      full_name:
+        document.getElementById("full_name").value.trim(),
+
+      passport_path:
+        filePath,
+
+      date_of_birth:
+        document.getElementById("date_of_birth").value || null,
+
+      gender:
+        document.getElementById("gender").value || null,
+
+      role:
+        document.getElementById("role").value,
+
+      phone:
+        document.getElementById("phone").value.trim(),
+
+      whatsapp:
+        document.getElementById("whatsapp").value.trim() || null,
+
+      email:
+        document.getElementById("email").value.trim() || null,
+
+      address:
+        document.getElementById("address").value.trim(),
+
+      experience:
+        document.getElementById("experience").value.trim() || null,
+
+      qualifications:
+        document.getElementById("qualifications").value.trim() || null,
+
+      emergency_name:
+        document.getElementById("emergency_name").value.trim() || null,
+
+      emergency_phone:
+        document.getElementById("emergency_phone").value.trim() || null,
+
+      other_information:
+        document.getElementById("other_information").value.trim() || null
+
+    };
+
+
+    const { data, error } =
+      await supabaseClient
+        .from("management_registrations")
+        .insert([managementData])
+        .select()
+        .single();
+
+
+    if (error) {
+
+      await supabaseClient
+        .storage
+        .from("player-documents")
+        .remove([filePath]);
+
+      throw error;
+    }
+
+
+    message.innerHTML = `
+      <div style="
+        padding:20px;
+        margin-top:20px;
+        border-radius:10px;
+        background:#e8f5e9;
+      ">
+
+        <h3>Registration Successful!</h3>
+
+        <p>
+          Your management registration has been submitted successfully.
+        </p>
+
+        <p>
+          <strong>Registration Code:</strong>
+          ${data.registration_code}
+        </p>
+
+        <p>
+          <strong>Status:</strong>
+          Pending
+        </p>
+
+        <p>
+          Your registration will be reviewed by the club management.
+        </p>
+
+      </div>
+    `;
+
+
+    form.reset();
+
+    photoPreview.innerHTML = "";
+
+  }
+
+  catch(error) {
+
+    console.error(error);
+
+    message.innerHTML = `
+      <p style="color:red;">
+        Registration failed:
+        ${error.message}
+      </p>
+    `;
+
+  }
+
+  finally {
+
+    submitBtn.disabled = false;
+
+    submitBtn.textContent =
+      "Submit Management Registration";
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
