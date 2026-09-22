@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Player Registration | All Stars Football Club</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .registration-page {
+      max-width: 950px;
+      margin: 0 auto;
+      padding: 25px 18px 60px;
+    }
+
+    .registration-header {
+      text-align: center;
+      background: white;
+      border-radius: 18px;
+      padding: 30px 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .registration-header img {
+      width: 95px;
+      height: 95px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    .registration-header h1 {
+      margin: 5px 0;
+    }
+
+    .registration-header p {
+      opacity: .75;
+    }
+
+    .registration-form {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-section h2 {
+      margin-bottom: 18px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #eee;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px 14px;
+      border: 1px solid #d5d5d5;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #fff;
+    }
+
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .passport-box {
+      border: 2px dashed #ccc;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .passport-preview {
+      display: none;
+      max-width: 150px;
+      max-height: 180px;
+      margin: 15px auto 0;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .junior-fields {
+      display: none;
+    }
+
+    .consent-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .consent-box input {
+      margin-top: 4px;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .form-message {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .success-message {
+      background: #e9f8ef;
+      color: #176b36;
+    }
+
+    .error-message {
+      background: #fdecec;
+      color: #a32121;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 25px;
+    }
+
+    .back-home a {
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 650px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .registration-form {
+        padding: 18px;
+      }
+
+      .registration-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="player-registration.html">Player Registration</a>
+      <a href="players.html">Players</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+
+  <main class="registration-page">
+
+    <section class="registration-header">
+
+      <img
+        src="all-stars-logo.jpeg"
+        alt="All Stars Football Club Logo"
+      >
+
+      <h1>Player Registration</h1>
+
+      <p>
+        Register to become a player of All Stars Football Club.
+      </p>
+
+    </section>
+
+
+    <form
+      id="playerRegistrationForm"
+      class="registration-form"
+    >
+
+      <!-- PERSONAL INFORMATION -->
+
+      <section class="form-section">
+
+        <h2>Personal Information</h2>
+
+        <div class="form-group">
+
+          <label for="full_name">
+            Full Name *
+          </label>
+
+          <input
+            type="text"
+            id="full_name"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="date_of_birth">
+              Date of Birth *
+            </label>
+
+            <input
+              type="date"
+              id="date_of_birth"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="gender">
+              Gender
+            </label>
+
+            <select id="gender">
+
+              <option value="">
+                Select Gender
+              </option>
+
+              <option value="Male">
+                Male
+              </option>
+
+              <option value="Female">
+                Female
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="player_category">
+            Player Category *
+          </label>
+
+          <select
+            id="player_category"
+            required
+          >
+
+            <option value="">
+              Select Category
+            </option>
+
+            <option value="Senior">
+              Senior
+            </option>
+
+            <option value="Junior / U16">
+              Junior / U16
+            </option>
+
+          </select>
+
+        </div>
+
+      </section>
+
+
+      <!-- PASSPORT -->
+
+      <section class="form-section">
+
+        <h2>Passport Photograph</h2>
+
+        <div class="passport-box">
+
+          <p>
+            Upload a recent passport photograph.
+          </p>
+
+          <input
+            type="file"
+            id="passport"
+            accept="image/jpeg,image/png,image/webp"
+            required
+          >
+
+          <img
+            id="passportPreview"
+            class="passport-preview"
+            alt="Passport preview"
+          >
+
+        </div>
+
+      </section>
+
+
+      <!-- CONTACT -->
+
+      <section class="form-section">
+
+        <h2>Contact Information</h2>
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="phone">
+              Phone Number *
+            </label>
+
+            <input
+              type="tel"
+              id="phone"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="whatsapp">
+              WhatsApp Number
+            </label>
+
+            <input
+              type="tel"
+              id="whatsapp"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="email">
+            Email Address
+          </label>
+
+          <input
+            type="email"
+            id="email"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="address">
+            Residential Address *
+          </label>
+
+          <textarea
+            id="address"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="state">
+              State
+            </label>
+
+            <input
+              type="text"
+              id="state"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="lga">
+              LGA
+            </label>
+
+            <input
+              type="text"
+              id="lga"
+            >
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- FOOTBALL INFORMATION -->
+
+      <section class="form-section">
+
+        <h2>Football Information</h2>
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="position">
+              Playing Position *
+            </label>
+
+            <select
+              id="position"
+              required
+            >
+
+              <option value="">
+                Select Position
+              </option>
+
+              <option value="Goalkeeper">
+                Goalkeeper
+              </option>
+
+              <option value="Defender">
+                Defender
+              </option>
+
+              <option value="Midfielder">
+                Midfielder
+              </option>
+
+              <option value="Forward">
+                Forward
+              </option>
+
+              <option value="Winger">
+                Winger
+              </option>
+
+              <option value="Striker">
+                Striker
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="preferred_foot">
+              Preferred Foot
+            </label>
+
+            <select id="preferred_foot">
+
+              <option value="">
+                Select Foot
+              </option>
+
+              <option value="Right">
+                Right
+              </option>
+
+              <option value="Left">
+                Left
+              </option>
+
+              <option value="Both">
+                Both
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="height">
+              Height
+            </label>
+
+            <input
+              type="text"
+              id="height"
+              placeholder="e.g. 1.75m"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="previous_club">
+              Previous Club
+            </label>
+
+            <input
+              type="text"
+              id="previous_club"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="playing_experience">
+            Playing Experience
+          </label>
+
+          <textarea
+            id="playing_experience"
+            placeholder="Tell us about your football experience"
+          ></textarea>
+
+        </div>
+
+      </section>
+
+
+      <!-- JUNIOR INFORMATION -->
+
+      <section
+        id="juniorFields"
+        class="form-section junior-fields"
+      >
+
+        <h2>Parent / Guardian Information</h2>
+
+        <div class="form-group">
+
+          <label for="parent_guardian_name">
+            Parent / Guardian Name *
+          </label>
+
+          <input
+            type="text"
+            id="parent_guardian_name"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="parent_guardian_phone">
+            Parent / Guardian Phone *
+          </label>
+
+          <input
+            type="tel"
+            id="parent_guardian_phone"
+          >
+
+        </div>
+
+      </section>
+
+
+      <!-- EMERGENCY -->
+
+      <section class="form-section">
+
+        <h2>Emergency Contact</h2>
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="emergency_name">
+              Emergency Contact Name *
+            </label>
+
+            <input
+              type="text"
+              id="emergency_name"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="emergency_phone">
+              Emergency Contact Phone *
+            </label>
+
+            <input
+              type="tel"
+              id="emergency_phone"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="medical_information">
+            Medical Information
+          </label>
+
+          <textarea
+            id="medical_information"
+            placeholder="Allergies, medical conditions or other important information"
+          ></textarea>
+
+        </div>
+
+      </section>
+
+
+      <!-- CONSENT -->
+
+      <div class="consent-box">
+
+        <input
+          type="checkbox"
+          id="consent"
+          required
+        >
+
+        <label for="consent">
+
+          I confirm that the information provided is accurate
+          and I consent to my registration with All Stars
+          Football Club.
+
+        </label>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="submit-button"
+      >
+        Submit Player Registration
+      </button>
+
+
+      <div
+        id="formMessage"
+        class="form-message"
+      ></div>
+
+    </form>
+
+
+    <div class="back-home">
+
+      <a href="index.html">
+        ← Back to Home
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <!-- SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://sagntfskpsyrwhzgtuzm.supabase.co";
+
+
+    const SUPABASE_ANON_KEY =
+      "YOUR_PUBLISHABLE_KEY";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    const form =
+      document.getElementById(
+        "playerRegistrationForm"
+      );
+
+
+    const category =
+      document.getElementById(
+        "player_category"
+      );
+
+
+    const juniorFields =
+      document.getElementById(
+        "juniorFields"
+      );
+
+
+    const passportInput =
+      document.getElementById(
+        "passport"
+      );
+
+
+    const passportPreview =
+      document.getElementById(
+        "passportPreview"
+      );
+
+
+    const formMessage =
+      document.getElementById(
+        "formMessage"
+      );
+
+
+    /* JUNIOR FIELD */
+
+    category.addEventListener(
+      "change",
+      function () {
+
+        if (
+          category.value ===
+          "Junior / U16"
+        ) {
+
+          juniorFields.style.display =
+            "block";
+
+          document
+            .getElementById(
+              "parent_guardian_name"
+            )
+            .required = true;
+
+          document
+            .getElementById(
+              "parent_guardian_phone"
+            )
+            .required = true;
+
+        } else {
+
+          juniorFields.style.display =
+            "none";
+
+          document
+            .getElementById(
+              "parent_guardian_name"
+            )
+            .required = false;
+
+          document
+            .getElementById(
+              "parent_guardian_phone"
+            )
+            .required = false;
+
+        }
+
+      }
+    );
+
+
+    /* PASSPORT PREVIEW */
+
+    passportInput.addEventListener(
+      "change",
+      function () {
+
+        const file =
+          passportInput.files[0];
+
+        if (!file) {
+          passportPreview.style.display =
+            "none";
+          return;
+        }
+
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          function (event) {
+
+            passportPreview.src =
+              event.target.result;
+
+            passportPreview.style.display =
+              "block";
+
+          };
+
+        reader.readAsDataURL(file);
+
+      }
+    );
+
+
+    /* MESSAGE */
+
+    function showMessage(
+      message,
+      type
+    ) {
+
+      formMessage.textContent =
+        message;
+
+      formMessage.className =
+        "form-message " +
+        (
+          type === "success"
+            ? "success-message"
+            : "error-message"
+        );
+
+      formMessage.style.display =
+        "block";
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* SUBMIT */
+
+    form.addEventListener(
+      "submit",
+      async function (event) {
+
+        event.preventDefault();
+
+
+        const file =
+          passportInput.files[0];
+
+
+        if (!file) {
+
+          showMessage(
+            "Please upload a passport photograph.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          ![
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ].includes(file.type)
+        ) {
+
+          showMessage(
+            "Please upload a JPG, PNG or WEBP image.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (
+          file.size >
+          5 * 1024 * 1024
+        ) {
+
+          showMessage(
+            "Passport photo must not exceed 5MB.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const submitButton =
+          form.querySelector(
+            "button[type='submit']"
+          );
+
+
+        submitButton.disabled =
+          true;
+
+        submitButton.textContent =
+          "Submitting...";
+
+
+        try {
+
+          const fullName =
+            document
+              .getElementById("full_name")
+              .value
+              .trim();
+
+
+          const extension =
+            file.name
+              .split(".")
+              .pop()
+              .toLowerCase();
+
+
+          const safeName =
+            fullName
+              .replace(
+                /[^a-zA-Z0-9]/g,
+                "-"
+              )
+              .toLowerCase();
+
+
+          const uniqueName =
+            Date.now() +
+            "-" +
+            Math.random()
+              .toString(36)
+              .substring(2, 8);
+
+
+          const filePath =
+            "players/" +
+            safeName +
+            "-" +
+            uniqueName +
+            "." +
+            extension;
+
+
+          /* UPLOAD PASSPORT */
+
+          const upload =
+            await supabaseClient
+              .storage
+              .from("player-documents")
+              .upload(
+                filePath,
+                file,
+                {
+                  cacheControl:
+                    "3600",
+                  upsert: false
+                }
+              );
+
+
+          if (upload.error) {
+            throw upload.error;
+          }
+
+
+          /* PLAYER DATA */
+
+          const playerData = {
+
+            full_name:
+              fullName,
+
+            passport_path:
+              filePath,
+
+            date_of_birth:
+              document
+                .getElementById(
+                  "date_of_birth"
+                )
+                .value,
+
+            gender:
+              document
+                .getElementById(
+                  "gender"
+                )
+                .value || null,
+
+            phone:
+              document
+                .getElementById(
+                  "phone"
+                )
+                .value
+                .trim(),
+
+            whatsapp:
+              document
+                .getElementById(
+                  "whatsapp"
+                )
+                .value
+                .trim() || null,
+
+            email:
+              document
+                .getElementById(
+                  "email"
+                )
+                .value
+                .trim() || null,
+
+            address:
+              document
+                .getElementById(
+                  "address"
+                )
+                .value
+                .trim(),
+
+            state:
+              document
+                .getElementById(
+                  "state"
+                )
+                .value
+                .trim() || null,
+
+            lga:
+              document
+                .getElementById(
+                  "lga"
+                )
+                .value
+                .trim() || null,
+
+            position:
+              document
+                .getElementById(
+                  "position"
+                )
+                .value,
+
+            preferred_foot:
+              document
+                .getElementById(
+                  "preferred_foot"
+                )
+                .value || null,
+
+            height:
+              document
+                .getElementById(
+                  "height"
+                )
+                .value
+                .trim() || null,
+
+            playing_experience:
+              document
+                .getElementById(
+                  "playing_experience"
+                )
+                .value
+                .trim() || null,
+
+            previous_club:
+              document
+                .getElementById(
+                  "previous_club"
+                )
+                .value
+                .trim() || null,
+
+            player_category:
+              category.value,
+
+            parent_guardian_name:
+              document
+                .getElementById(
+                  "parent_guardian_name"
+                )
+                .value
+                .trim() || null,
+
+            parent_guardian_phone:
+              document
+                .getElementById(
+                  "parent_guardian_phone"
+                )
+                .value
+                .trim() || null,
+
+            emergency_name:
+              document
+                .getElementById(
+                  "emergency_name"
+                )
+                .value
+                .trim(),
+
+            emergency_phone:
+              document
+                .getElementById(
+                  "emergency_phone"
+                )
+                .value
+                .trim(),
+
+            medical_information:
+              document
+                .getElementById(
+                  "medical_information"
+                )
+                .value
+                .trim() || null,
+
+            status:
+              "Pending",
+
+            consent:
+              true
+
+          };
+
+
+          /* SAVE REGISTRATION */
+
+          const result =
+            await supabaseClient
+              .from(
+                "player_registrations"
+              )
+              .insert(
+                playerData
+              )
+              .select(
+                "registration_code"
+              )
+              .single();
+
+
+          if (result.error) {
+
+            /* REMOVE UPLOADED FILE
+               IF DATABASE INSERT FAILS */
+
+            await supabaseClient
+              .storage
+              .from("player-documents")
+              .remove([filePath]);
+
+            throw result.error;
+
+          }
+
+
+          showMessage(
+            "Registration successful! Your registration code is " +
+            result.data.registration_code +
+            ". Your application is now pending approval.",
+            "success"
+          );
+
+
+          form.reset();
+
+          juniorFields.style.display =
+            "none";
+
+          passportPreview.style.display =
+            "none";
+
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          showMessage(
+            error.message ||
+            "Registration failed. Please try again.",
+            "error"
+          );
+
+        }
+
+
+        submitButton.disabled =
+          false;
+
+        submitButton.textContent =
+          "Submit Player Registration";
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
