@@ -8,10 +8,17 @@ function showMessage(el, text, error=false) {
   el.textContent = text;
   el.className = `message show${error ? " error" : ""}`;
 }
-
-async function submitForm(formId, endpoint, messageId, successText) {
+ 
+/****async function submitForm(formId, endpoint, messageId, successText) {
   const form = document.getElementById(formId);
   const message = document.getElementById(messageId);
+  ***/
+async function submitForm(formId, endpoint, messageId, successText) {
+  const form = document.getElementById(formId);
+  if (!form) return;
+
+  const message = document.getElementById(messageId);
+  if (!form) return;
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     message.className = "message";
