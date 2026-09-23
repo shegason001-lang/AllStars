@@ -204,8 +204,8 @@ async function makeRegistrationPdf(row, type) {
 
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(7.5);
-    doc.text("Minna, Niger State", 191, 19, { align: "right" });
-    doc.text("+234 804 113 0288", 191, 25, { align: "right" });
+    doc.text("Shanu Village Minna, Niger State", 191, 19, { align: "right" });
+    doc.text("+234 703 464 4779", 191, 25, { align: "right" });
 
     y = 45;
 
