@@ -15,7 +15,7 @@ body {
   overflow-x: hidden;
 }
 
-header {
+header { 
   width: 100%;
   box-sizing: border-box;
 }
@@ -372,35 +372,12 @@ form textarea {
 
 
 <script>
-
-const SUPABASE_URL =
-  "https://sagntfskpsyrwhzgtuzm.supabase.co";
-
-const SUPABASE_ANON_KEY =
-  "sb_publishable_tfBwDmxzJr8kpWmU7IW3gg_pRJ0VJpi";
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-  );
-
-
-const form =
-  document.getElementById("managementForm");
-
-const message =
-  document.getElementById("message");
-
-const passport =
-  document.getElementById("passport");
-
-const photoPreview =
-  document.getElementById("photoPreview");
-
+const form = document.getElementById("managementForm");
+const message = document.getElementById("message");
+const passport = document.getElementById("passport");
+const photoPreview = document.getElementById("photoPreview");
 
 passport.addEventListener("change", () => {
-
   const file = passport.files[0];
 
   if (!file) {
@@ -410,8 +387,7 @@ passport.addEventListener("change", () => {
 
   const reader = new FileReader();
 
-  reader.onload = function(e) {
-
+  reader.onload = function (e) {
     photoPreview.innerHTML = `
       <img
         src="${e.target.result}"
@@ -425,154 +401,34 @@ passport.addEventListener("change", () => {
         "
       >
     `;
-
   };
 
   reader.readAsDataURL(file);
-
 });
 
-
 form.addEventListener("submit", async (event) => {
-
   event.preventDefault();
 
   message.innerHTML = "";
 
-  const submitBtn =
-    document.getElementById("submitBtn");
+  const submitBtn = document.getElementById("submitBtn");
 
   submitBtn.disabled = true;
-
-  submitBtn.textContent =
-    "Submitting...";
-
-
-  const file =
-    passport.files[0];
-
-  if (!file) {
-
-    message.innerHTML =
-      "<p>Please select a passport photograph.</p>";
-
-    submitBtn.disabled = false;
-
-    submitBtn.textContent =
-      "Submit Management Registration";
-
-    return;
-  }
-
+  submitBtn.textContent = "Submitting...";
 
   try {
+    const formData = new FormData(form);
 
-    const safeName =
-      document
-        .getElementById("full_name")
-        .value
-        .trim()
-        .replace(/[^a-zA-Z0-9]+/g, "-")
-        .toLowerCase();
+    const response = await fetch("/api/register/management", {
+      method: "POST",
+      body: formData
+    });
 
+    const result = await response.json();
 
-    const extension =
-      file.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-    const uniqueName =
-      `${Date.now()}-${Math.random()
-        .toString(36)
-        .substring(2, 8)}`;
-
-
-    const filePath =
-      `management/${safeName}-${uniqueName}.${extension}`;
-
-
-    const { error: uploadError } =
-      await supabaseClient
-        .storage
-        .from("player-documents")
-        .upload(filePath, file, {
-          cacheControl: "3600",
-          upsert: false
-        });
-
-
-    if (uploadError) {
-      throw uploadError;
+    if (!response.ok) {
+      throw new Error(result.error || "Registration failed.");
     }
-
-
-    const managementData = {
-
-      full_name:
-        document.getElementById("full_name").value.trim(),
-
-      passport_path:
-        filePath,
-
-      date_of_birth:
-        document.getElementById("date_of_birth").value || null,
-
-      gender:
-        document.getElementById("gender").value || null,
-
-      role:
-        document.getElementById("role").value,
-
-      phone:
-        document.getElementById("phone").value.trim(),
-
-      whatsapp:
-        document.getElementById("whatsapp").value.trim() || null,
-
-      email:
-        document.getElementById("email").value.trim() || null,
-
-      address:
-        document.getElementById("address").value.trim(),
-
-      experience:
-        document.getElementById("experience").value.trim() || null,
-
-      qualifications:
-        document.getElementById("qualifications").value.trim() || null,
-
-      emergency_name:
-        document.getElementById("emergency_name").value.trim() || null,
-
-      emergency_phone:
-        document.getElementById("emergency_phone").value.trim() || null,
-
-      other_information:
-        document.getElementById("other_information").value.trim() || null
-
-    };
-
-
-    const { data, error } =
-      await supabaseClient
-        .from("management_registrations")
-        .insert([managementData])
-        .select()
-        .single();
-
-
-    if (error) {
-
-      await supabaseClient
-        .storage
-        .from("player-documents")
-        .remove([filePath]);
-
-      throw error;
-    }
-
 
     message.innerHTML = `
       <div style="
@@ -581,7 +437,6 @@ form.addEventListener("submit", async (event) => {
         border-radius:10px;
         background:#e8f5e9;
       ">
-
         <h3>Registration Successful!</h3>
 
         <p>
@@ -589,54 +444,31 @@ form.addEventListener("submit", async (event) => {
         </p>
 
         <p>
-          <strong>Registration Code:</strong>
-          ${data.registration_code}
-        </p>
-
-        <p>
-          <strong>Status:</strong>
-          Pending
+          <strong>Status:</strong> Pending
         </p>
 
         <p>
           Your registration will be reviewed by the club management.
         </p>
-
       </div>
     `;
 
-
     form.reset();
-
     photoPreview.innerHTML = "";
 
-  }
-
-  catch(error) {
-
+  } catch (error) {
     console.error(error);
 
     message.innerHTML = `
       <p style="color:red;">
-        Registration failed:
-        ${error.message}
+        Registration failed: ${error.message}
       </p>
     `;
-
-  }
-
-  finally {
-
+  } finally {
     submitBtn.disabled = false;
-
-    submitBtn.textContent =
-      "Submit Management Registration";
-
+    submitBtn.textContent = "Submit Management Registration";
   }
-
 });
-
 </script>
-
 </body>
 </html>
