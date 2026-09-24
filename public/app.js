@@ -8,7 +8,7 @@ function showMessage(el, text, error=false) {
   el.textContent = text;
   el.className = `message show${error ? " error" : ""}`;
 }
- 
+  
 /****async function submitForm(formId, endpoint, messageId, successText) {
   const form = document.getElementById(formId);
   const message = document.getElementById(messageId);
@@ -214,7 +214,8 @@ async function makeRegistrationPdf(row, type) {
     // --------------------------------------------------
     let passportData = null;
 
-    if (type === "player" && row.passport_path) {
+    /*****if (type === "player" && row.passport_path)******/
+    if (row.passport_path) {
       try {
         const { data, error } = await sb.storage
           .from("player-documents")
