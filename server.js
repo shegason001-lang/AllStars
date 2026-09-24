@@ -106,15 +106,11 @@ app.post("/api/register/player", upload.single("passport"), async (req, res) => 
       return res.status(400).json({ error: "Parent/Guardian name and phone are required for Junior / U16 players." });
     }
 
-    /***const { data, error } = await supabaseAdmin
-      .from("player_registrations")
-      .insert(payload)
-      .select("registration_id, registration_code")
-      .single();****/
-    
-const { error } = await supabaseAdmin
-  .from("management_registrations")
-  .insert(payload);
+   const { data, error } = await supabaseAdmin
+  .from("player_registrations")
+  .insert(payload)
+  .select("registration_id, registration_code")
+  .single();
 
     
     if (error) {
@@ -174,22 +170,32 @@ app.post("/api/register/management", upload.single("passport"), async (req, res)
       status: "Pending"
     };
 
-    const { data, error } = await supabaseAdmin
+    /***const { data, error } = await supabaseAdmin
       .from("management_registrations")
       .insert(payload)
       .select("registration_id, registration_code")
-      .single();
-
+      .single(); *****/
+    
+const { error } = await supabaseAdmin
+  .from("management_registrations")
+  .insert(payload);
+    
     if (error) {
       await supabaseAdmin.storage.from("player-documents").remove([filePath]);
       throw error;
     }
 
-    res.json({
+   /*** res.json({
       ok: true,
       registration_id: data.registration_id,
       registration_code: data.registration_code
-    });
+    }); ***/
+
+    res.json({
+  ok: true,
+  message: "Management registration submitted successfully."
+});
+    
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Registration could not be submitted. Please try again." });
