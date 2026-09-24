@@ -106,12 +106,17 @@ app.post("/api/register/player", upload.single("passport"), async (req, res) => 
       return res.status(400).json({ error: "Parent/Guardian name and phone are required for Junior / U16 players." });
     }
 
-    const { data, error } = await supabaseAdmin
+    /***const { data, error } = await supabaseAdmin
       .from("player_registrations")
       .insert(payload)
       .select("registration_id, registration_code")
-      .single();
+      .single();****/
+    
+const { error } = await supabaseAdmin
+  .from("management_registrations")
+  .insert(payload);
 
+    
     if (error) {
       await supabaseAdmin.storage.from("player-documents").remove([filePath]);
       throw error;
